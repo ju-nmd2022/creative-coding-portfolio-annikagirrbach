@@ -1,7 +1,13 @@
 [
   {
+    "file": "experiments/example.js",
+    "name": "Name of your experiment",
+    "description": "Explains the what and the why. What is the main idea? What is the purpose? Describes the coding process and implementation choices and gives a high level system overview."
+  },
+  {
     "file": "experiments/exercise_04.js",
-    "name": "Tile Pattern",
-    "description": "Hexagons aligned in a grid to create a pattern."
+    "name": "Name of your experiment",
+    "description": "Explains the what and the why. What is the main idea? What is the purpose? Describes the coding process and implementation choices and gives a high level system overview."
   }
+  
 ]

@@ -1,13 +1,63 @@
 [
-  {
-    "file": "experiments/example.js",
-    "name": "Name of your experiment",
-    "description": "Explains the what and the why. What is the main idea? What is the purpose? Describes the coding process and implementation choices and gives a high level system overview."
-  },
+  
   {
     "file": "experiments/exercise_04.js",
-    "name": "Name of your experiment",
-    "description": "Explains the what and the why. What is the main idea? What is the purpose? Describes the coding process and implementation choices and gives a high level system overview."
+    "name": "Tiles",
+    "description": "Hexagons arranged in a grid, creating a pattern."
+  }
+
+  ,{
+    "file": "experiments/exercise_05.js",
+    "name": "Crazy Bee Hive",
+    "description": "The Hexagons create a new pattern by turning arround their center. For a short moment you can see a pattern that looks like a bee hive."
+  }
+
+  ,{
+    "file": "experiments/exercise_06.js",
+    "name": "Bee Hive",
+    "description": "The Hexagons are arranged in a bee hive pattern."
   }
   
+  ,{
+    "file": "experiments/exercise_08.js",
+    "name": "Bees flying",
+    "description": "The dots flying over the bee hive pattern resemble little bees flying in and out. The different sizes create depth. Some bees appear closer, some are further away."
+  }
+
+  ,{
+    "file": "experiments/lavalamp_02.js",
+    "name": "Lava Lamp",
+    "description": "The dots floating over the canvas move like a lava lamp."
+  }
+
+  ,{
+    "file": "experiments/flowfield_01.js",
+    "name": "Flowfield Setup",
+    "description": "Flowfield in basic black and white with particels flowing in different directions. With a mouse click the particels change direction."
+  }
+
+  ,{
+    "file": "experiments/flowfield_02_color.js",
+    "name": "Colorful Flowfield",
+    "description": "Colorful Flowfield with particels flowing in different directions. With a mouse click the particels change direction."
+  }
+
+  ,{
+    "file": "experiments/flowfield_03_color.js",
+    "name": "Algae in the ocean",
+    "description": "Particels are in a greenish color to create the illusion of being algae in the ocean."
+  }
+
+  ,{
+    "file": "experiments/sinewaves_01.js",
+    "name": "Sine Wave Setup",
+    "description": "Sine Waves are animated in a circle."
+  }
+
+  ,{
+    "file": "experiments/sinewaves_04.js",
+    "name": "Ink",
+    "description": "Colors where changed to blue and the oppacity was set lower. This creates the illusion of an ink splash."
+  }
+
 ]

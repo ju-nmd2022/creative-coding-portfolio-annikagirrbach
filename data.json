@@ -1,4 +1,9 @@
 [
+  {
+    "file": "experiments/example.js",
+    "name": "Tiles",
+    "description": "Hexagons arranged in a grid, creating a pattern."
+  },
   
   {
     "file": "experiments/exercise_04.js",

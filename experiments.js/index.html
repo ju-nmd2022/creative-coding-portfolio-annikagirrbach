@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tone JS Demo</title>
+    <script src="http://unpkg.com/tone" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.js"></script>
+    <script src="sketch.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <body>
+      <h1>Synth</h1>
+      <p id="selected">Selected: Sine</p>
+      <button id="sine">Sine</button>
+      <button id="square">Square</button>
+      <button id="sawtooth">SawTooth</button>
+      <button id="triangle">Triangle</button>
+      <hr />
+      <h2>Envelope</h2>
+      <p>
+        <input type="number" step="0.1" value="0.2" id="attack" />
+        <label for="attack">Attack:</label>
+      </p>
+      <p>
+        <input type="number" step="0.1" value="0.3" id="decay" />
+        <label for="decay">Decay:</label>
+      </p>
+      <p>
+        <input type="number" step="0.1" value="0.5" id="sustain" />
+        <label for="sustain">Sustain:</label>
+      </p>
+      <p>
+        <input type="number" step="0.1" value="0.8" id="release" />
+        <label for="release">Release:</label>
+      </p>
+      <hr />
+      <button id="buttonC">C</button>
+      <button id="buttonD">D</button>
+      <button id="buttonE">E</button>
+      <button id="buttonF">F</button>
+      <button id="buttonG">G</button>
+      <button id="buttonA">A</button>
+      <button id="buttonB">B</button>
+      <button id="buttonC2">C</button>
+  </body>
+</html>

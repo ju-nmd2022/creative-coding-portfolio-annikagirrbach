@@ -1,10 +1,4 @@
-[
-  {
-    "file": "experiments.js/example.js",
-    "name": "Tiles",
-    "description": "Hexagons arranged in a grid, creating a pattern."
-  },
-  
+[  
 
   {
     "file": "experiments.js/exercise_04.js",
@@ -65,5 +59,12 @@
     "name": "Ink",
     "description": "Colors where changed to blue and the oppacity was set lower. This creates the illusion of an ink splash."
   }
+
+  ,{
+    "file": "experiments.js/sketch.js",
+    "name": "Changed by Music",
+    "description": "When you press the notes on the synth, the graphic changes."
+  }
+
 
 ]

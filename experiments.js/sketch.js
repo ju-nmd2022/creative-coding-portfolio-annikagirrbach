@@ -1,38 +1,69 @@
 function setup() {
-  createCanvas(400, 400);
 
-  let canvas = document.querySelector('canvas');
-  canvas.style.width = '400px';
-  canvas.style.height = '400px';
+  let container = createDiv();
+  container.id('mainContainer');
+  container.style('display', 'flex');
+  container.style('flex-direction', 'column');
+  container.style('align-items', 'center');
+  
+  let canvas = createCanvas(400, 400);
+  canvas.parent('mainContainer');
+  
+  canvas.style('display', 'block');
+  canvas.style('margin', '0');
 
-  angleMode(DEGREES);
+  let controlContainer = createDiv();
+  controlContainer.parent('mainContainer');
   
-  createButtonWithText("Sine", "sine").mousePressed(() => selectOscillatorType("sine"));
-  createButtonWithText("Square", "square").mousePressed(() => selectOscillatorType("square"));
-  createButtonWithText("Sawtooth", "sawtooth").mousePressed(() => selectOscillatorType("sawtooth"));
-  createButtonWithText("Triangle", "triangle").mousePressed(() => selectOscillatorType("triangle"));
+  createButtonWithText("Sine", "sine").mousePressed(() => selectOscillatorType("sine")).parent(controlContainer);
+  createButtonWithText("Square", "square").mousePressed(() => selectOscillatorType("square")).parent(controlContainer);
+  createButtonWithText("Sawtooth", "sawtooth").mousePressed(() => selectOscillatorType("sawtooth")).parent(controlContainer);
+  createButtonWithText("Triangle", "triangle").mousePressed(() => selectOscillatorType("triangle")).parent(controlContainer);
   
-  createLabel("Attack");
-  createInputField("attack", "0.5").input(() => synth.envelope.attack = this.value());
+  createLabel("Attack").parent(controlContainer);
+  createInputField("attack", "0.5").input(() => synth.envelope.attack = this.value()).parent(controlContainer);
   
-  createLabel("Decay");
-  createInputField("decay", "0.5").input(() => synth.envelope.decay = this.value());
-
-  createLabel("Sustain");
-  createInputField("sustain", "0.5").input(() => synth.envelope.sustain = this.value());
-
-  createLabel("Release");
-  createInputField("release", "0.5").input(() => synth.envelope.release = this.value());
+  createLabel("Decay").parent(controlContainer);
+  createInputField("decay", "0.5").input(() => synth.envelope.decay = this.value()).parent(controlContainer);
   
-  createButtonWithText("C", "buttonC").mousePressed(() => playNoteWithColor("C3")).mouseReleased(stopNote);
-  createButtonWithText("D", "buttonD").mousePressed(() => playNoteWithColor("D3")).mouseReleased(stopNote);
-  createButtonWithText("E", "buttonE").mousePressed(() => playNoteWithColor("E3")).mouseReleased(stopNote);
-  createButtonWithText("F", "buttonF").mousePressed(() => playNoteWithColor("F3")).mouseReleased(stopNote);
-  createButtonWithText("G", "buttonG").mousePressed(() => playNoteWithColor("G3")).mouseReleased(stopNote);
-  createButtonWithText("A", "buttonA").mousePressed(() => playNoteWithColor("A3")).mouseReleased(stopNote);
-  createButtonWithText("B", "buttonB").mousePressed(() => playNoteWithColor("B3")).mouseReleased(stopNote);
-  createButtonWithText("C2", "buttonC2").mousePressed(() => playNoteWithColor("C4")).mouseReleased(stopNote);
+  createLabel("Sustain").parent(controlContainer);
+  createInputField("sustain", "0.5").input(() => synth.envelope.sustain = this.value()).parent(controlContainer);
+  
+  createLabel("Release").parent(controlContainer);
+  createInputField("release", "0.5").input(() => synth.envelope.release = this.value()).parent(controlContainer);
+  
+  createButtonWithText("C", "buttonC").mousePressed(() => playNoteWithColor("C3")).mouseReleased(stopNote).parent(controlContainer);
+  createButtonWithText("D", "buttonD").mousePressed(() => playNoteWithColor("D3")).mouseReleased(stopNote).parent(controlContainer);
+  createButtonWithText("E", "buttonE").mousePressed(() => playNoteWithColor("E3")).mouseReleased(stopNote).parent(controlContainer);
+  createButtonWithText("F", "buttonF").mousePressed(() => playNoteWithColor("F3")).mouseReleased(stopNote).parent(controlContainer);
+  createButtonWithText("G", "buttonG").mousePressed(() => playNoteWithColor("G3")).mouseReleased(stopNote).parent(controlContainer);
+  createButtonWithText("A", "buttonA").mousePressed(() => playNoteWithColor("A3")).mouseReleased(stopNote).parent(controlContainer);
+  createButtonWithText("B", "buttonB").mousePressed(() => playNoteWithColor("B3")).mouseReleased(stopNote).parent(controlContainer);
+  createButtonWithText("C2", "buttonC2").mousePressed(() => playNoteWithColor("C4")).mouseReleased(stopNote).parent(controlContainer);
 }
+
+const containerStyle = `
+  #mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #mainContainer canvas {
+    margin-bottom: 10px; /* Reduce space between canvas and controls */
+  }
+  #mainContainer button,
+  #mainContainer label,
+  #mainContainer input {
+    margin: 2px; /* Decrease spacing between elements */
+  }
+`;
+
+function addStyles(css) {
+  let style = createElement('style', css);
+  document.head.appendChild(style.elt);
+}
+
+addStyles(containerStyle);
 
 // Helper function to create a button with text
 function createButtonWithText(text, id) {

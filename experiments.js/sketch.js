@@ -1,3 +1,5 @@
+let controlHeight = 200; // Height reserved for the UI elements at the top
+
 function setup() {
   createCanvas(innerWidth, innerHeight);
   angleMode(DEGREES);
@@ -111,13 +113,15 @@ function selectOscillatorType(type) {
 
 function draw () {
   background(30);
+
+  push();
+  translate(width / 2, height / 2 + controlHeight / 2);
+
   if (isNotePlaying) {
     fill(currentColor[0], currentColor[1], currentColor[2]);
   } else {
     fill(255);
   }
-
-  translate(width / 2, height / 2);
 
   beginShape();
   for (let i = 0; i < 359; i++) {
@@ -136,4 +140,6 @@ function draw () {
     vertex(x, y);
   }
   endShape(CLOSE);
+
+  pop();
 }

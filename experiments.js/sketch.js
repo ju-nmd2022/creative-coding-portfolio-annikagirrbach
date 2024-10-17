@@ -1,5 +1,5 @@
 function setup() {
-  createCanvas(innerWidth, innerHeight);
+  createCanvas(400, 400);
   angleMode(DEGREES);
   
   createButtonWithText("Sine", "sine").mousePressed(() => selectOscillatorType("sine"));

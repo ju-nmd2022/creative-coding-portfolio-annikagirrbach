@@ -1,27 +1,57 @@
- function setup() {
+function setup() {
   createCanvas(innerWidth, innerHeight);
-  angleMode (DEGREES);
+  angleMode(DEGREES);
+  
+  // Create elements dynamically
+  createButtonWithText("Sine", "sine").mousePressed(() => selectOscillatorType("sine"));
+  createButtonWithText("Square", "square").mousePressed(() => selectOscillatorType("square"));
+  createButtonWithText("Sawtooth", "sawtooth").mousePressed(() => selectOscillatorType("sawtooth"));
+  createButtonWithText("Triangle", "triangle").mousePressed(() => selectOscillatorType("triangle"));
+  
+  createLabel("Attack");
+  createInputField("attack", "0.5").input(() => synth.envelope.attack = this.value());
+  
+  createLabel("Decay");
+  createInputField("decay", "0.5").input(() => synth.envelope.decay = this.value());
+
+  createLabel("Sustain");
+  createInputField("sustain", "0.5").input(() => synth.envelope.sustain = this.value());
+
+  createLabel("Release");
+  createInputField("release", "0.5").input(() => synth.envelope.release = this.value());
+  
+  createButtonWithText("C", "buttonC").mousePressed(() => playNoteWithColor("C3")).mouseReleased(stopNote);
+  createButtonWithText("D", "buttonD").mousePressed(() => playNoteWithColor("D3")).mouseReleased(stopNote);
+  createButtonWithText("E", "buttonE").mousePressed(() => playNoteWithColor("E3")).mouseReleased(stopNote);
+  createButtonWithText("F", "buttonF").mousePressed(() => playNoteWithColor("F3")).mouseReleased(stopNote);
+  createButtonWithText("G", "buttonG").mousePressed(() => playNoteWithColor("G3")).mouseReleased(stopNote);
+  createButtonWithText("A", "buttonA").mousePressed(() => playNoteWithColor("A3")).mouseReleased(stopNote);
+  createButtonWithText("B", "buttonB").mousePressed(() => playNoteWithColor("B3")).mouseReleased(stopNote);
+  createButtonWithText("C2", "buttonC2").mousePressed(() => playNoteWithColor("C4")).mouseReleased(stopNote);
 }
 
-const selectedElement = document.getElementById("selected");
-const sineButton = document.getElementById("sine");
-const squareButton = document.getElementById("square");
-const sawButton = document.getElementById("sawtooth");
-const triangleButton = document.getElementById("triangle");
-const startButton = document.getElementById("start");
-const stopButton = document.getElementById("stop");
-const attackInput = document.getElementById("attack");
-const decayInput = document.getElementById("decay");
-const sustainInput = document.getElementById("sustain");
-const releaseInput = document.getElementById("release");
-const buttonC = document.getElementById("buttonC");
-const buttonD = document.getElementById("buttonD");
-const buttonE = document.getElementById("buttonE");
-const buttonF = document.getElementById("buttonF");
-const buttonG = document.getElementById("buttonG");
-const buttonA = document.getElementById("buttonA");
-const buttonB = document.getElementById("buttonB");
-const buttonC2 = document.getElementById("buttonC2");
+// Helper function to create a button with text
+function createButtonWithText(text, id) {
+  let btn = createButton(text);
+  btn.id(id);
+  btn.style("margin", "5px");
+  return btn;
+}
+
+// Helper function to create input fields
+function createInputField(id, defaultValue) {
+  let input = createInput(defaultValue);
+  input.id(id);
+  input.style("margin", "5px");
+  return input;
+}
+
+// Helper function to create label
+function createLabel(text) {
+  let label = createElement('label', text);
+  label.style("display", "block");
+}
+
 let synth;
 let isNotePlaying = false;
 let currentColor = [255, 255, 255];
@@ -67,80 +97,21 @@ window.addEventListener("load", () => {
   synth = new Tone.MonoSynth().toDestination();
 });
 
-sineButton.addEventListener("click", () => {
-  synth.oscillator.type = "sine";
-  selectedElement.innerText = "Selected: Sine";
-});
-
-squareButton.addEventListener("click", () => {
-  synth.oscillator.type = "square";
-  selectedElement.innerText = "Selected: Square";
-});
-
-sawButton.addEventListener("click", () => {
-  synth.oscillator.type = "sawtooth";
-  selectedElement.innerText = "Selected: SawTooth";
-});
-
-triangleButton.addEventListener("click", () => {
-  synth.oscillator.type = "triangle";
-  selectedElement.innerText = "Selected: Triangle";
-});
-
-attackInput.addEventListener("change", () => {
-  synth.envelope.attack = attackInput.value;
-});
-
-decayInput.addEventListener("change", () => {
-  synth.envelope.decay = decayInput.value;
-});
-
-sustainInput.addEventListener("change", () => {
-  synth.envelope.sustain = sustainInput.value;
-});
-
-releaseInput.addEventListener("change", () => {
-  synth.envelope.release = releaseInput.value;
-});
-
-buttonC.addEventListener("mousedown", () => playNoteWithColor("C3"));
-buttonC.addEventListener("mouseup", stopNote);
-
-buttonD.addEventListener("mousedown", () => playNoteWithColor("D3"));
-buttonD.addEventListener("mouseup", stopNote);
-
-buttonE.addEventListener("mousedown", () => playNoteWithColor("E3"));
-buttonE.addEventListener("mouseup", stopNote);
-
-buttonF.addEventListener("mousedown", () => playNoteWithColor("F3"));
-buttonF.addEventListener("mouseup", stopNote);
-
-buttonG.addEventListener("mousedown", () => playNoteWithColor("G3"));
-buttonG.addEventListener("mouseup", stopNote);
-
-buttonA.addEventListener("mousedown", () => playNoteWithColor("A3"));
-buttonA.addEventListener("mouseup", stopNote);
-
-buttonB.addEventListener("mousedown", () => playNoteWithColor("B3"));
-buttonB.addEventListener("mouseup", stopNote);
-
-buttonC2.addEventListener("mousedown", () => playNoteWithColor("C4"));
-buttonC2.addEventListener("mouseup", stopNote);
-
-window.addEventListener("click", () => {
-  Tone.start();
-});
-
+// Function to select oscillator type
+function selectOscillatorType(type) {
+  synth.oscillator.type = type;
+  console.log("Selected: " + type);
+}
 
 function draw () {
-  background (30);
+  background(30);
   if (isNotePlaying) {
     fill(currentColor[0], currentColor[1], currentColor[2]);
   } else {
     fill(255);
   }
 
-  translate (width/2, height/2);
+  translate(width / 2, height / 2);
 
   beginShape();
   for (let i = 0; i < 359; i++) {
@@ -158,5 +129,5 @@ function draw () {
     let y = r * sin(i);
     vertex(x, y);
   }
-  endShape (CLOSE);
+  endShape(CLOSE);
 }

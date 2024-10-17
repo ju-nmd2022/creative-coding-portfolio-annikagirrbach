@@ -1,42 +1,32 @@
-let controlHeight = 200; // Height reserved for the UI elements at the top
-
 function setup() {
   createCanvas(innerWidth, innerHeight);
   angleMode(DEGREES);
   
-  let yOffset = 10; // Starting Y offset for the controls
+  createButtonWithText("Sine", "sine").mousePressed(() => selectOscillatorType("sine"));
+  createButtonWithText("Square", "square").mousePressed(() => selectOscillatorType("square"));
+  createButtonWithText("Sawtooth", "sawtooth").mousePressed(() => selectOscillatorType("sawtooth"));
+  createButtonWithText("Triangle", "triangle").mousePressed(() => selectOscillatorType("triangle"));
   
-  createButtonWithText("Sine", "sine").mousePressed(() => selectOscillatorType("sine")).position(10, yOffset);
-  createButtonWithText("Square", "square").mousePressed(() => selectOscillatorType("square")).position(60, yOffset);
-  createButtonWithText("Sawtooth", "sawtooth").mousePressed(() => selectOscillatorType("sawtooth")).position(120, yOffset);
-  createButtonWithText("Triangle", "triangle").mousePressed(() => selectOscillatorType("triangle")).position(190, yOffset);
+  createLabel("Attack");
+  createInputField("attack", "0.5").input(() => synth.envelope.attack = this.value());
   
-  yOffset += 30; // Move down for the next row of controls
+  createLabel("Decay");
+  createInputField("decay", "0.5").input(() => synth.envelope.decay = this.value());
+
+  createLabel("Sustain");
+  createInputField("sustain", "0.5").input(() => synth.envelope.sustain = this.value());
+
+  createLabel("Release");
+  createInputField("release", "0.5").input(() => synth.envelope.release = this.value());
   
-  createLabel("Attack").position(10, yOffset);
-  createInputField("attack", "0.5").input(function() { synth.envelope.attack = this.value(); }).position(70, yOffset);
-
-  createLabel("Decay").position(150, yOffset);
-  createInputField("decay", "0.5").input(function() { synth.envelope.decay = this.value(); }).position(210, yOffset);
-
-  yOffset += 30; // Move down for the next row
-
-  createLabel("Sustain").position(10, yOffset);
-  createInputField("sustain", "0.5").input(function() { synth.envelope.sustain = this.value(); }).position(70, yOffset);
-
-  createLabel("Release").position(150, yOffset);
-  createInputField("release", "0.5").input(function() { synth.envelope.release = this.value(); }).position(210, yOffset);
-  
-  yOffset += 40; // Move down for the next row
-
-  createButtonWithText("C", "buttonC").mousePressed(() => playNoteWithColor("C3")).mouseReleased(stopNote).position(10, yOffset);
-  createButtonWithText("D", "buttonD").mousePressed(() => playNoteWithColor("D3")).mouseReleased(stopNote).position(60, yOffset);
-  createButtonWithText("E", "buttonE").mousePressed(() => playNoteWithColor("E3")).mouseReleased(stopNote).position(110, yOffset);
-  createButtonWithText("F", "buttonF").mousePressed(() => playNoteWithColor("F3")).mouseReleased(stopNote).position(160, yOffset);
-  createButtonWithText("G", "buttonG").mousePressed(() => playNoteWithColor("G3")).mouseReleased(stopNote).position(210, yOffset);
-  createButtonWithText("A", "buttonA").mousePressed(() => playNoteWithColor("A3")).mouseReleased(stopNote).position(260, yOffset);
-  createButtonWithText("B", "buttonB").mousePressed(() => playNoteWithColor("B3")).mouseReleased(stopNote).position(310, yOffset);
-  createButtonWithText("C2", "buttonC2").mousePressed(() => playNoteWithColor("C4")).mouseReleased(stopNote).position(360, yOffset);
+  createButtonWithText("C", "buttonC").mousePressed(() => playNoteWithColor("C3")).mouseReleased(stopNote);
+  createButtonWithText("D", "buttonD").mousePressed(() => playNoteWithColor("D3")).mouseReleased(stopNote);
+  createButtonWithText("E", "buttonE").mousePressed(() => playNoteWithColor("E3")).mouseReleased(stopNote);
+  createButtonWithText("F", "buttonF").mousePressed(() => playNoteWithColor("F3")).mouseReleased(stopNote);
+  createButtonWithText("G", "buttonG").mousePressed(() => playNoteWithColor("G3")).mouseReleased(stopNote);
+  createButtonWithText("A", "buttonA").mousePressed(() => playNoteWithColor("A3")).mouseReleased(stopNote);
+  createButtonWithText("B", "buttonB").mousePressed(() => playNoteWithColor("B3")).mouseReleased(stopNote);
+  createButtonWithText("C2", "buttonC2").mousePressed(() => playNoteWithColor("C4")).mouseReleased(stopNote);
 }
 
 // Helper function to create a button with text
@@ -58,7 +48,7 @@ function createInputField(id, defaultValue) {
 // Helper function to create label
 function createLabel(text) {
   let label = createElement('label', text);
-  label.style("display", "inline-block");
+  label.style("display", "block");
 }
 
 let synth;
@@ -106,6 +96,7 @@ window.addEventListener("load", () => {
   synth = new Tone.MonoSynth().toDestination();
 });
 
+// Function to select oscillator type
 function selectOscillatorType(type) {
   synth.oscillator.type = type;
   console.log("Selected: " + type);
@@ -113,15 +104,13 @@ function selectOscillatorType(type) {
 
 function draw () {
   background(30);
-
-  push();
-  translate(width / 2, height / 2 + controlHeight / 2);
-
   if (isNotePlaying) {
     fill(currentColor[0], currentColor[1], currentColor[2]);
   } else {
     fill(255);
   }
+
+  translate(width / 2, height / 2);
 
   beginShape();
   for (let i = 0; i < 359; i++) {
@@ -140,6 +129,4 @@ function draw () {
     vertex(x, y);
   }
   endShape(CLOSE);
-
-  pop();
 }
